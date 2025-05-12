@@ -1,24 +1,39 @@
-use crate::{mock::*, Error, Event, Something};
-use frame_support::{assert_noop, assert_ok};
+use crate::{mock::*, Error, Usernames};
+use frame_support::{assert_err, assert_ok};
+use sp_core::ConstU32;
+use sp_runtime::BoundedVec;
 
 #[test]
-fn it_works_for_default_value() {
-	new_test_ext().execute_with(|| {
-		// Go past genesis block so events get deposited
-		System::set_block_number(1);
-		// Dispatch a signed extrinsic.
-		assert_ok!(Template::do_something(RuntimeOrigin::signed(1), 42));
-		// Read pallet storage and assert an expected result.
-		assert_eq!(Something::<Test>::get(), Some(42));
-		// Assert that the correct event was deposited
-		System::assert_last_event(Event::SomethingStored { something: 42, who: 1 }.into());
-	});
-}
+fn set_username_works() {
+    new_test_ext().execute_with(|| {
+        // Go past genesis block so events get deposited
+        System::set_block_number(1);
 
-#[test]
-fn correct_error_for_none_value() {
-	new_test_ext().execute_with(|| {
-		// Ensure the expected error is thrown when no value is present.
-		assert_noop!(Template::cause_error(RuntimeOrigin::signed(1)), Error::<Test>::NoneValue);
-	});
+        // Test valid username
+        let valid_username = b"alice".to_vec();
+        assert_ok!(Template::set_username(
+            RuntimeOrigin::signed(1),
+            valid_username.clone()
+        ));
+
+        // Read pallet storage and assert the username was set
+        assert_eq!(
+            Usernames::<Test>::get(1),
+            BoundedVec::<u8, ConstU32<32>>::try_from(valid_username).unwrap()
+        );
+
+        // Test username that's too long
+        let long_username = b"this_username_is_way_too_long_for_our_storage".to_vec();
+        assert_err!(
+            Template::set_username(RuntimeOrigin::signed(2), long_username),
+            Error::<Test>::UsernameTooLong
+        );
+
+        // Test invalid characters
+        let invalid_username = b"invalid@name".to_vec();
+        assert_err!(
+            Template::set_username(RuntimeOrigin::signed(3), invalid_username),
+            Error::<Test>::InvalidUsername
+        );
+    });
 }
