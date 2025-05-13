@@ -307,6 +307,8 @@ impl_runtime_apis! {
             alloc::string::String::from_utf8(pallet_usernames::Usernames::<Runtime>::get(account_id).into()).unwrap()
         }
 
+        // FIXME: Here I wanted to use Result instead of bool but I got a lot of strange errors about `Result` not being implemented.
+        // I didn't have enough time to investigate more, so I prefer to use a simple bool here.
         fn set_username(account_id: AccountId, username: alloc::string::String) -> bool {
             use frame_support::dispatch::DispatchResult;
             use frame_system::RawOrigin;
