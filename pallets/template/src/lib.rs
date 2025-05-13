@@ -105,7 +105,6 @@ pub mod pallet {
         #[pallet::weight(T::WeightInfo::do_something())]
         pub fn set_username(origin: OriginFor<T>, username: Vec<u8>) -> DispatchResult {
             let sender = ensure_signed(origin)?;
-            println!("Signed user ID: {:?}", sender);
 
             // Check username length
             let max_len = T::MaxUsernameLength::get();
