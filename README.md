@@ -108,3 +108,46 @@ Node A JSON-RPC: http://127.0.0.1:9933
 Node B JSON-RPC: http://127.0.0.1:9934
 
 You can interact with either using curl, Postman, or frontend apps like Polkadot.js Apps.
+
+## 🔑 Setting and Querying account_id → username
+Now let’s see how to store and fetch a username for an account using JavaScript and Polkadot.js API.
+
+### Store account_id → username on the Chain
+This script allows an account to set its username in storage:
+
+```javascript
+import { ApiPromise, WsProvider, Keyring } from '@polkadot/api';
+
+const wsProvider = new WsProvider('ws://127.0.0.1:9944'); // Connect to Node B
+const api = await ApiPromise.create({ provider: wsProvider });
+
+async function main() {
+    // Create a keyring instance
+    const keyring = new Keyring({ type: 'sr25519' });
+    const alice = keyring.addFromUri('//Alice');
+    console.log(`Alice's account ID: ${alice.address}`);
+
+    // Send a signed transaction
+    const tx = api.tx.template.setUsername('AliceUsername');
+    const hash = await tx.signAndSend(alice);
+
+    console.log(`Transaction hash: ${hash}`);
+}
+
+main().then(() => {
+    console.log('Username stored successfully!');
+});
+```
+
+Retrieve the Stored Username
+To query a stored username from the chain:
+```javascript
+async function getUsername(account) {
+    const username = await api.query.template.usernames(account);
+    console.log(`Stored username: ${username.toHuman()}`);
+}
+
+getUsername('5Gw3s7q4QLkSWwknzttLBvDqFf1uRnXcVWuJxNCEgFh5cKZT'); // Replace with Alice's Account ID
+```
+
+
