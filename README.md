@@ -158,5 +158,15 @@ async function getUsername(account) {
 
 getUsername('5Gw3s7q4QLkSWwknzttLBvDqFf1uRnXcVWuJxNCEgFh5cKZT'); // Replace with Alice's Account ID
 ```
+or you can use the following curl command to query the username:
 
-
+```bash
+curl -X POST http://localhost:9934 \
+           -H "Content-Type: application/json" \
+           -d '{
+             "jsonrpc": "2.0",
+             "method": "get_username",
+             "params": ["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"],
+             "id": 1
+           }' | jq
+```
