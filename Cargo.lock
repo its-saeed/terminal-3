@@ -6022,6 +6022,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "pallet-template-rpc"
+version = "1.0.0"
+dependencies = [
+ "jsonrpsee",
+ "pallet-template-runtime-api",
+ "parity-scale-codec",
+ "sp-api",
+ "sp-blockchain",
+ "sp-runtime",
+]
+
+[[package]]
+name = "pallet-template-runtime-api"
+version = "1.0.0"
+dependencies = [
+ "parity-scale-codec",
+ "sp-api",
+]
+
+[[package]]
 name = "pallet-timestamp"
 version = "39.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9524,6 +9544,7 @@ dependencies = [
  "frame-system",
  "futures",
  "jsonrpsee",
+ "pallet-template-rpc",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc",
  "sc-basic-authorship",
@@ -9572,6 +9593,7 @@ dependencies = [
  "pallet-grandpa",
  "pallet-sudo",
  "pallet-template",
+ "pallet-template-runtime-api",
  "pallet-timestamp",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc-runtime-api",

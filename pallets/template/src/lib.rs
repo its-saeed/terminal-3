@@ -42,6 +42,7 @@
 // Re-export pallet items so that they can be accessed from the crate namespace.
 pub use pallet::*;
 
+use scale_info::prelude::vec::Vec;
 // FRAME pallets require their own "mock runtimes" to be able to run unit tests. This module
 // contains a mock runtime specific for testing this pallet's functionality.
 #[cfg(test)]
@@ -82,8 +83,13 @@ pub mod pallet {
     }
     #[pallet::storage]
     #[pallet::getter(fn usernames)]
-    pub type Usernames<T: Config> =
-        StorageMap<_, Twox64Concat, T::AccountId, BoundedVec<u8, T::MaxUsernameLength>, ValueQuery>;
+    pub type Usernames<T: Config> = StorageMap<
+        _,
+        Blake2_128Concat,
+        T::AccountId,
+        BoundedVec<u8, T::MaxUsernameLength>,
+        ValueQuery,
+    >;
 
     #[pallet::error]
     pub enum Error<T> {
@@ -99,6 +105,7 @@ pub mod pallet {
         #[pallet::weight(T::WeightInfo::do_something())]
         pub fn set_username(origin: OriginFor<T>, username: Vec<u8>) -> DispatchResult {
             let sender = ensure_signed(origin)?;
+            println!("Signed user ID: {:?}", sender);
 
             // Check username length
             let max_len = T::MaxUsernameLength::get();

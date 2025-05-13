@@ -22,6 +22,11 @@ fn set_username_works() {
             BoundedVec::<u8, ConstU32<32>>::try_from(valid_username).unwrap()
         );
 
+        use frame_system::RawOrigin;
+
+        let user = RuntimeOrigin::from(RawOrigin::Signed(1));
+        println!("{:?}", user);
+
         // Test username that's too long
         let long_username = b"this_username_is_way_too_long_for_our_storage".to_vec();
         assert_err!(
