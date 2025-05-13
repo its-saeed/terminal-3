@@ -1,4 +1,4 @@
-use crate as pallet_template;
+use crate as pallet_usernames;
 use frame_support::derive_impl;
 use sp_core::ConstU32;
 use sp_runtime::BuildStorage;
@@ -28,7 +28,7 @@ mod runtime {
     pub type System = frame_system::Pallet<Test>;
 
     #[runtime::pallet_index(1)]
-    pub type Template = pallet_template::Pallet<Test>;
+    pub type Template = pallet_usernames::Pallet<Test>;
 }
 
 #[derive_impl(frame_system::config_preludes::TestDefaultConfig)]
@@ -36,7 +36,7 @@ impl frame_system::Config for Test {
     type Block = Block;
 }
 
-impl pallet_template::Config for Test {
+impl pallet_usernames::Config for Test {
     type WeightInfo = ();
     type MaxUsernameLength = ConstU32<32>; // Allows usernames up to 32 bytes
 }

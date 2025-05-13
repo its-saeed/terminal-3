@@ -35,7 +35,7 @@ subkey generate --scheme sr25519
 For simplicity, let’s use Alice and Bob (built-in dev keys).
 
 ```bash
-./target/release/node-template key insert \
+./target/release/solochain-template-node key insert \
   --base-path /tmp/nodeA \
   --chain local \
   --scheme sr25519 \
@@ -44,7 +44,7 @@ For simplicity, let’s use Alice and Bob (built-in dev keys).
 ```
 Insert Bob’s key (Node B)
 ```bash
-./target/release/node-template key insert \
+./target/release/solochain-template-node key insert \
   --base-path /tmp/nodeB \
   --chain local \
   --scheme sr25519 \
@@ -57,25 +57,34 @@ Insert Bob’s key (Node B)
 Terminal 1: Start Node A
 
 ```bash
-./target/release/node-template \
+./target/release/solochain-template-node \
   --base-path /tmp/nodeA \
   --chain local \
   --port 30333 \
-  --ws-port 9944 \
-  --rpc-port 9933 \
+  --rpc-port 9944 \
   --validator \
   --name nodeA
+```
+
+If you get an error like this:
+
+```bash
+Error: NetworkKeyNotFound("/tmp/nodeA/chains/local_testnet/network/secret_ed25519")
+```
+You need to create a key for the network. Run this command:
+
+```bash
+./target/release/solochain-template-node key generate-node-key --base-path /tmp/nodeA
 ```
 
 Terminal 2: Start Node B and connect it to Node A
 
 ```bash
-./target/release/node-template \
+./target/release/solochain-template-node \
   --base-path /tmp/nodeB \
   --chain local \
   --port 30334 \
-  --ws-port 9945 \
-  --rpc-port 9934 \
+  --rpc-port 9945 \
   --validator \
   --bootnodes /ip4/127.0.0.1/tcp/30333/p2p/<NODE_A_PEER_ID> \
   --name nodeB

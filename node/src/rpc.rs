@@ -8,7 +8,7 @@
 use std::sync::Arc;
 
 use jsonrpsee::RpcModule;
-use pallet_template_rpc::{TemplateApiServer, TemplatePallet, TemplateRuntimeApi};
+use pallet_usernames_rpc::{TemplateApiServer, TemplatePallet, TemplateRuntimeApi};
 use sc_transaction_pool_api::TransactionPool;
 use solochain_template_runtime::{opaque::Block, AccountId, Balance, Nonce};
 use sp_api::ProvideRuntimeApi;

@@ -4,7 +4,7 @@ use jsonrpsee::{
     proc_macros::rpc,
     types::{error::ErrorCode, ErrorObject},
 };
-pub use pallet_template_runtime_api::TemplateApi as TemplateRuntimeApi;
+pub use pallet_usernames_runtime_api::TemplateApi as TemplateRuntimeApi;
 use sp_api::ProvideRuntimeApi;
 use sp_blockchain::HeaderBackend;
 

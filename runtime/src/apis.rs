@@ -302,16 +302,16 @@ impl_runtime_apis! {
         }
     }
 
-    impl pallet_template_runtime_api::TemplateApi<Block, AccountId, alloc::string::String> for Runtime {
+    impl pallet_usernames_runtime_api::TemplateApi<Block, AccountId, alloc::string::String> for Runtime {
         fn get_username(account_id: AccountId) -> alloc::string::String {
-            alloc::string::String::from_utf8(pallet_template::Usernames::<Runtime>::get(account_id).into()).unwrap()
+            alloc::string::String::from_utf8(pallet_usernames::Usernames::<Runtime>::get(account_id).into()).unwrap()
         }
 
         fn set_username(account_id: AccountId, username: alloc::string::String) -> bool {
             use frame_support::BoundedVec;
             use sp_core::ConstU32;
             let bounded_username: BoundedVec<u8, ConstU32<32>> = BoundedVec::truncate_from(username.into_bytes());
-            pallet_template::Usernames::<Runtime>::insert(account_id, bounded_username);
+            pallet_usernames::Usernames::<Runtime>::insert(account_id, bounded_username);
             true
         }
     }

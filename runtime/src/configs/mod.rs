@@ -157,8 +157,8 @@ impl pallet_sudo::Config for Runtime {
     type WeightInfo = pallet_sudo::weights::SubstrateWeight<Runtime>;
 }
 
-/// Configure the pallet-template in pallets/template.
-impl pallet_template::Config for Runtime {
-    type WeightInfo = pallet_template::weights::SubstrateWeight<Runtime>;
+/// Configure the pallet-usernames in pallets/usernames.
+impl pallet_usernames::Config for Runtime {
+    type WeightInfo = pallet_usernames::weights::SubstrateWeight<Runtime>;
     type MaxUsernameLength = ConstU32<32>; // Allows usernames up to 32 bytes
 }

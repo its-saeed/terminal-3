@@ -79,7 +79,7 @@ sp-timestamp.default-features = true
 sp-timestamp.workspace = true
 substrate-frame-rpc-system.default-features = true
 substrate-frame-rpc-system.workspace = true
-pallet-template-rpc = { version = "1.0.0", path = "../pallets/template/rpc" }
+pallet-usernames-rpc = { version = "1.0.0", path = "../pallets/usernames/rpc" }
 
 
 [build-dependencies]

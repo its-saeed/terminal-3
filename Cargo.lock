@@ -6008,40 +6008,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-template"
-version = "0.1.0"
-dependencies = [
- "frame-benchmarking",
- "frame-support",
- "frame-system",
- "parity-scale-codec",
- "scale-info",
- "sp-core",
- "sp-io",
- "sp-runtime",
-]
-
-[[package]]
-name = "pallet-template-rpc"
-version = "1.0.0"
-dependencies = [
- "jsonrpsee",
- "pallet-template-runtime-api",
- "parity-scale-codec",
- "sp-api",
- "sp-blockchain",
- "sp-runtime",
-]
-
-[[package]]
-name = "pallet-template-runtime-api"
-version = "1.0.0"
-dependencies = [
- "parity-scale-codec",
- "sp-api",
-]
-
-[[package]]
 name = "pallet-timestamp"
 version = "39.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6106,6 +6072,40 @@ dependencies = [
  "sp-api",
  "sp-runtime",
  "sp-weights",
+]
+
+[[package]]
+name = "pallet-usernames"
+version = "0.1.0"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+]
+
+[[package]]
+name = "pallet-usernames-rpc"
+version = "1.0.0"
+dependencies = [
+ "jsonrpsee",
+ "pallet-usernames-runtime-api",
+ "parity-scale-codec",
+ "sp-api",
+ "sp-blockchain",
+ "sp-runtime",
+]
+
+[[package]]
+name = "pallet-usernames-runtime-api"
+version = "1.0.0"
+dependencies = [
+ "parity-scale-codec",
+ "sp-api",
 ]
 
 [[package]]
@@ -9544,9 +9544,9 @@ dependencies = [
  "frame-system",
  "futures",
  "jsonrpsee",
- "pallet-template-rpc",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc",
+ "pallet-usernames-rpc",
  "sc-basic-authorship",
  "sc-cli",
  "sc-client-api",
@@ -9592,11 +9592,11 @@ dependencies = [
  "pallet-balances",
  "pallet-grandpa",
  "pallet-sudo",
- "pallet-template",
- "pallet-template-runtime-api",
  "pallet-timestamp",
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc-runtime-api",
+ "pallet-usernames",
+ "pallet-usernames-runtime-api",
  "parity-scale-codec",
  "scale-info",
  "serde_json",
