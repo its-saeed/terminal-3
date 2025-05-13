@@ -8,7 +8,6 @@ sp_api::decl_runtime_apis! {
     AccountId: Codec,
     Username: Codec,
      {
-        fn get_value() -> u32;
         fn get_username(account_id: AccountId) -> Username;
         fn set_username(account_id: AccountId, username: Username) -> bool;
     }
