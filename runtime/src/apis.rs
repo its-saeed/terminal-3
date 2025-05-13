@@ -308,11 +308,19 @@ impl_runtime_apis! {
         }
 
         fn set_username(account_id: AccountId, username: alloc::string::String) -> bool {
-            use frame_support::BoundedVec;
-            use sp_core::ConstU32;
-            let bounded_username: BoundedVec<u8, ConstU32<32>> = BoundedVec::truncate_from(username.into_bytes());
-            pallet_usernames::Usernames::<Runtime>::insert(account_id, bounded_username);
-            true
+            use frame_support::dispatch::DispatchResult;
+            use frame_system::RawOrigin;
+
+            let username_bytes = username.into_bytes();
+
+            let origin = RawOrigin::Signed(account_id).into();
+
+            let result: DispatchResult = pallet_usernames::Pallet::<Runtime>::set_username(
+                origin,
+                username_bytes
+            );
+
+            result.is_ok()
         }
     }
 }
